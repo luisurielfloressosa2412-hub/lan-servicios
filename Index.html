@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>LAN Servicios y Comercio - Tienda de Azulejos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #f9fafb;
+      color: #111827;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #7f1d1d, #b91c1c);
+      color: #ffffff;
+      padding: 10px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.35);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      height: 46px;
+      width: auto;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .logo-text span:first-child {
+      font-size: 1.15rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .logo-text span:last-child {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    nav {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      font-size: 0.88rem;
+    }
+
+    nav a {
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: background 0.2s, transform 0.1s;
+      white-space: nowrap;
+    }
+
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.14);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(255, 255, 255, 0.7);
+    }
+
+    .btn-cart {
+      background: #fde047;
+      color: #111827;
+      font-weight: bold;
+    }
+
+    .btn-cart span {
+      background: #111827;
+      color: #fde047;
+      border-radius: 999px;
+      padding: 2px 7px;
+      margin-left: 5px;
+      font-size: 0.75rem;
+    }
+
+    .btn-facebook {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      font-size: 0.8rem;
+    }
+
+    .btn-facebook::before {
+      content: "f";
+      font-weight: 900;
+      font-family: Arial, sans-serif;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #1877f2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: #fff;
+    }
+
+    /* Layout general */
+    main {
+      max-width: 1200px;
+      margin: 20px auto 40px;
+      padding: 0 15px;
+    }
+
+    /* Hero */
+    .hero {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 22px;
+      display: grid;
+      grid-template-columns: 2fr 1.1fr;
+      gap: 20px;
+      box-shadow: 0 15px 40px rgba(15, 23, 42, 0.12);
+      margin-bottom: 25px;
+      border: 1px solid #fee2e2;
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero-text h1 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: #991b1b;
+    }
+
+    .hero-text p {
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+      color: #374151;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .badge {
+      background: #fee2e2;
+      color: #b91c1c;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      background: #b91c1c;
+      color: white;
+      border: none;
+      border-radius: 999px;
+      padding: 10px 18px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.1s;
+      box-shadow: 0 8px 20px rgba(185, 28, 28, 0.45);
+    }
+
+    .btn-primary:hover {
+      background: #991b1b;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(153, 27, 27, 0.55);
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+      border-radius: 999px;
+      padding: 10px 18px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-secondary:hover {
+      background: #fef2f2;
+      transform: translateY(-1px);
+    }
+
+    .hero-image {
+      background: radial-gradient(circle at top left, #fee2e2, #b91c1c);
+      border-radius: 18px;
+      position: relative;
+      overflow: hidden;
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f9fafb;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .hero-image h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .hero-image p {
+      font-size: 0.85rem;
+      max-width: 280px;
+      margin: 0 auto;
+      color: #fee2e2;
+    }
+
+    .hero-tile {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.18);
+      transform: rotate(12deg);
+    }
+
+    .hero-tile:nth-child(1) {
+      top: 18px;
+      left: 18px;
+    }
+
+    .hero-tile:nth-child(2) {
+      bottom: -20px;
+      right: 0;
+      width: 180px;
+      height: 180px;
+      transform: rotate(-8deg);
+    }
+
+    /* Filtros & búsqueda */
+    .filters {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 15px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      border: 1px solid #f3f4f6;
+    }
+
+    .filters-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .filters label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #4b5563;
+    }
+
+    .filters select,
+    .filters input {
+      padding: 6px 8px;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      font-size: 0.8rem;
+      min-width: 120px;
+    }
+
+    .filters-search {
+      flex: 1;
+      min-width: 220px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .filters-search input {
+      flex: 1;
+    }
+
+    /* Catálogo */
+    .section-title {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .product-card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 12px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid #f3f4f6;
+    }
+
+    .product-image {
+      height: 130px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #e5e7eb, #9ca3af);
+      margin-bottom: 10px;
+      position: relative;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .product-image::after {
+      content: "";
+      position: absolute;
+      inset: 15px;
+      border-radius: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      transform: rotate(-3deg);
+    }
+
+    .product-info {
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+
+    .product-name {
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: #111827;
+    }
+
+    .product-meta {
+      color: #6b7280;
+      font-size: 0.8rem;
+      margin-bottom: 4px;
+    }
+
+    .product-price {
+      font-weight: 700;
+      color: #16a34a;
+      margin-bottom: 4px;
+    }
+
+    .product-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 5px;
+    }
+
+    .btn-small {
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: none;
+      font-size: 0.78rem;
+      cursor: pointer;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .btn-add {
+      background: #16a34a;
+      color: #ffffff;
+    }
+
+    .btn-add:hover {
+      background: #15803d;
+    }
+
+    .btn-details {
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    .btn-details:hover {
+      background: #d1d5db;
+    }
+
+    /* Servicios */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .service-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 15px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+      font-size: 0.88rem;
+      border: 1px solid #f3f4f6;
+    }
+
+    .service-title {
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #b91c1c;
+    }
+
+    .service-chip {
+      display: inline-block;
+      margin-top: 6px;
+      background: #fee2e2;
+      color: #b91c1c;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* Contacto */
+    .contact {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 15px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+      margin-bottom: 30px;
+      font-size: 0.9rem;
+      border: 1px solid #f3f4f6;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .contact form {
+      display: grid;
+      gap: 8px;
+    }
+
+    .contact label {
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .contact input,
+    .contact textarea {
+      padding: 7px 9px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 0.85rem;
+    }
+
+    .contact textarea {
+      resize: vertical;
+      min-height: 70px;
+    }
+
+    .contact-info p {
+      margin-bottom: 5px;
+    }
+
+    /* MAPA */
+    .map-container {
+      margin-top: 8px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.25);
+      border: 1px solid #e5e7eb;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 220px;
+      border: 0;
+    }
+
+    /* Footer */
+    footer {
+      background: #111827;
+      color: #9ca3af;
+      padding: 18px 15px;
+      margin-top: 40px;
+    }
+
+    footer .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 15px;
+      font-size: 0.8rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #e5e7eb;
+    }
+
+    /* Carrito (sidebar) */
+    .cart-sidebar {
+      position: fixed;
+      top: 0;
+      right: -420px;
+      width: 100%;
+      max-width: 380px;
+      height: 100vh;
+      background: #f9fafb;
+      box-shadow: -10px 0 30px rgba(15, 23, 42, 0.3);
+      transition: right 0.25s ease-out;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-sidebar.open {
+      right: 0;
+    }
+
+    .cart-header {
+      padding: 15px;
+      background: #b91c1c;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cart-header h3 {
+      font-size: 1rem;
+    }
+
+    .cart-close {
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .cart-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px 15px;
+      font-size: 0.85rem;
+    }
+
+    .cart-item {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 8px;
+      margin-bottom: 8px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+      border: 1px solid #f3f4f6;
+    }
+
+    .cart-item-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .cart-item-meta {
+      font-size: 0.78rem;
+      color: #6b7280;
+    }
+
+    .cart-item-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    .cart-qty {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.8rem;
+    }
+
+    .cart-qty button {
+      border: none;
+      border-radius: 999px;
+      padding: 0 7px;
+      cursor: pointer;
+      background: #e5e7eb;
+    }
+
+    .cart-remove {
+      border: none;
+      background: transparent;
+      color: #b91c1c;
+      font-size: 0.78rem;
+      cursor: pointer;
+    }
+
+    .cart-summary {
+      border-top: 1px solid #e5e7eb;
+      padding-top: 10px;
+      margin-top: 8px;
+      font-size: 0.85rem;
+    }
+
+    .cart-summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .cart-footer {
+      padding: 10px 15px 15px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .cart-footer button {
+      width: 100%;
+    }
+
+    .cart-empty {
+      text-align: center;
+      margin-top: 20px;
+      color: #6b7280;
+      font-size: 0.85rem;
+    }
+
+    /* Modal genérico (login / detalles / pago) */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2500;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal {
+      background: #ffffff;
+      border-radius: 16px;
+      max-width: 460px;
+      width: 100%;
+      padding: 20px;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.5);
+      font-size: 0.9rem;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .modal-header h3 {
+      font-size: 1rem;
+    }
+
+    .modal-close {
+      cursor: pointer;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .modal form {
+      display: grid;
+      gap: 8px;
+    }
+
+    .modal label {
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .modal input {
+      padding: 7px 9px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 0.85rem;
+    }
+
+    .modal-note {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-top: 6px;
+    }
+
+    .modal-product-details p {
+      margin-bottom: 5px;
+      font-size: 0.87rem;
+    }
+
+    .modal-product-details strong {
+      font-weight: 700;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #fee2e2;
+      color: #b91c1c;
+      padding: 3px 7px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      margin-right: 4px;
+      margin-top: 4px;
+    }
+
+    /* Pago */
+    .pago-resumen {
+      background: #f3f4f6;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 0.85rem;
+    }
+
+    .pago-resumen-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .pago-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    @media (max-width: 500px) {
+      .pago-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <!-- Guarda tu logo como logo-lan.png en la misma carpeta -->
+      <img src="logo-lan.png" alt="LAN Servicios y Comercio" />
+      <div class="logo-text">
+        <span>LAN SERVICIOS Y COMERCIO</span>
+        <span>S.A.P.I. DE C.V.</span>
+      </div>
+    </div>
+    <nav>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#contacto">Contacto</a>
+      <!-- Reemplaza la URL de Facebook por la real -->
+      <a href="https://www.facebook.com/" target="_blank" class="btn-facebook">Facebook</a>
+      <a href="#" class="btn-outline" id="btnLogin">Iniciar sesión</a>
+      <a href="#" class="btn-cart" id="btnCart">
+        Carrito
+        <span id="cartCount">0</span>
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-text">
+        <h1>LAN Servicios y Comercio: Comercializadora de azulejos en línea</h1>
+        <p>
+          Cotiza, compra y programa la entrega de tus azulejos sin salir de casa.
+          Ideal para constructores, arquitectos, ferreterías y hogares que buscan calidad y rapidez.
+        </p>
+        <div class="hero-badges">
+          <div class="badge">Envíos a todo México</div>
+          <div class="badge">Amplio catálogo en pisos y muros</div>
+          <div class="badge">Pagos simulados seguros</div>
+        </div>
+        <div class="hero-cta">
+          <button class="btn-primary" onclick="scrollToSection('catalogo')">Ver catálogo</button>
+          <button class="btn-secondary" onclick="scrollToSection('servicios')">Ver servicios</button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="hero-tile"></div>
+        <div class="hero-tile"></div>
+        <div>
+          <h2>Tienda online de LAN</h2>
+          <p>
+            Agrega productos al carrito, simula tu compra y gestiona tus pedidos
+            como en una tienda en línea profesional.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILTROS -->
+    <section class="filters">
+      <div class="filters-group">
+        <div>
+          <label for="filterMaterial">Material</label><br />
+          <select id="filterMaterial">
+            <option value="">Todos</option>
+            <option value="Porcelanato">Porcelanato</option>
+            <option value="Cerámico">Cerámico</option>
+            <option value="Mármol">Mármol</option>
+          </select>
+        </div>
+        <div>
+          <label for="filterUso">Uso</label><br />
+          <select id="filterUso">
+            <option value="">Todos</option>
+            <option value="Interior">Interior</option>
+            <option value="Exterior">Exterior</option>
+            <option value="Piso/Muro">Piso/Muro</option>
+          </select>
+        </div>
+        <div>
+          <label for="filterAcabado">Acabado</label><br />
+          <select id="filterAcabado">
+            <option value="">Todos</option>
+            <option value="Mate">Mate</option>
+            <option value="Brillante">Brillante</option>
+            <option value="Antiderrapante">Antiderrapante</option>
+          </select>
+        </div>
+      </div>
+      <div class="filters-search">
+        <div style="flex: 1;">
+          <label for="searchInput">Buscar productos</label><br />
+          <input type="text" id="searchInput" placeholder="Ej. mármol blanco, tipo madera..." />
+        </div>
+        <button class="btn-secondary" type="button" id="btnClearFilters">Limpiar filtros</button>
+      </div>
+    </section>
+
+    <!-- CATÁLOGO -->
+    <section id="catalogo">
+      <h2 class="section-title">Catálogo de azulejos destacados</h2>
+      <div class="products-grid" id="productsGrid"></div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section id="servicios">
+      <h2 class="section-title">Servicios de la tienda online</h2>
+      <div class="services">
+        <div class="service-card">
+          <div class="service-title">Venta en línea de azulejos</div>
+          <p>
+            Explora el catálogo de LAN, compara modelos y arma tu carrito
+            con precios por metro cuadrado o por caja según tus necesidades.
+          </p>
+          <span class="service-chip">Catálogo digital</span>
+        </div>
+        <div class="service-card">
+          <div class="service-title">Cotización y facturación</div>
+          <p>
+            Genera cotizaciones, ajusta cantidades y descarga tu comprobante
+            para control de tus proyectos y obras.
+          </p>
+          <span class="service-chip">Cotizaciones rápidas</span>
+        </div>
+        <div class="service-card">
+          <div class="service-title">Envíos y seguimiento</div>
+          <p>
+            Programa la entrega a tu domicilio u obra y recibe confirmaciones
+            de salida y llegada del material.
+          </p>
+          <span class="service-chip">Logística confiable</span>
+        </div>
+        <div class="service-card">
+          <div class="service-title">Asesoría especializada</div>
+          <p>
+            Asesoría para elegir recubrimientos según tráfico, acabado y zona de aplicación
+            (interior, exterior, húmedo, etc.).
+          </p>
+          <span class="service-chip">Soporte LAN</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="contact">
+      <h2 class="section-title">Contáctanos</h2>
+      <div class="contact-grid">
+        <form onsubmit="event.preventDefault(); alert('Gracias, hemos recibido tu mensaje. (Simulación)');">
+          <div>
+            <label for="cNombre">Nombre</label>
+            <input id="cNombre" required />
+          </div>
+          <div>
+            <label for="cCorreo">Correo electrónico</label>
+            <input id="cCorreo" type="email" required />
+          </div>
+          <div>
+            <label for="cMensaje">Mensaje</label>
+            <textarea id="cMensaje" required></textarea>
+          </div>
+          <button class="btn-primary" type="submit">Enviar mensaje</button>
+        </form>
+        <div class="contact-info">
+          <p><strong>LAN SERVICIOS Y COMERCIO S.A.P.I. DE C.V.</strong></p>
+          <p>Dirección: (Agrega aquí la dirección de tu sucursal)</p>
+          <p>Teléfono: (Agrega aquí tu número)</p>
+          <p>Horario tienda en línea: 24/7</p>
+          <p>Correo: ventas@tudominio.com</p>
+          <p style="margin-top: 8px;">Síguenos:</p>
+          <p><a href="https://www.facebook.com/" target="_blank">Facebook oficial de LAN</a></p>
+
+          <p style="margin-top: 10px;"><strong>Ubicación en mapa:</strong></p>
+          <div class="map-container">
+            <!-- Geolocalización que me pasaste -->
+            <iframe
+              src="https://maps.app.goo.gl/gFS7pznJKpjHCzfR6"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+          <p style="margin-top: 6px;">
+            <a href="https://maps.app.goo.gl/gFS7pznJKpjHCzfR6" target="_blank">
+              Abrir ubicación en Google Maps
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>© <span id="year"></span> LAN Servicios y Comercio S.A.P.I. de C.V. Todos los derechos reservados.</div>
+      <div class="footer-links">
+        <a href="#">Aviso de privacidad</a>
+        <a href="#">Términos y condiciones</a>
+        <a href="#">Política de envíos</a>
+        <a href="#">Devoluciones</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SIDEBAR CARRITO -->
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>Tu carrito</h3>
+      <div class="cart-close" id="cartClose">&times;</div>
+    </div>
+    <div class="cart-body" id="cartBody"></div>
+    <div class="cart-footer">
+      <button class="btn-primary" type="button" id="btnCheckout">Finalizar compra</button>
+    </div>
+  </div>
+
+  <!-- MODAL LOGIN -->
+  <div class="modal-backdrop" id="modalLogin">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Iniciar sesión / Registrarse</h3>
+        <div class="modal-close" data-close="modalLogin">&times;</div>
+      </div>
+      <form onsubmit="event.preventDefault(); alert('Inicio de sesión simulado.'); document.getElementById('modalLogin').classList.remove('open');">
+        <div>
+          <label for="loginCorreo">Correo electrónico</label>
+          <input type="email" id="loginCorreo" required />
+        </div>
+        <div>
+          <label for="loginPass">Contraseña</label>
+          <input type="password" id="loginPass" required />
+        </div>
+        <button class="btn-primary" type="submit">Entrar</button>
+        <div class="modal-note">
+          Esta es una simulación de acceso a tu cuenta para gestionar pedidos,
+          direcciones de envío y métodos de pago.
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL DETALLES PRODUCTO -->
+  <div class="modal-backdrop" id="modalProducto">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="detalleNombre">Detalle de producto</h3>
+        <div class="modal-close" data-close="modalProducto">&times;</div>
+      </div>
+      <div class="modal-product-details">
+        <p><strong>Código:</strong> <span id="detalleCodigo"></span></p>
+        <p><strong>Material:</strong> <span id="detalleMaterial"></span></p>
+        <p><strong>Uso:</strong> <span id="detalleUso"></span></p>
+        <p><strong>Acabado:</strong> <span id="detalleAcabado"></span></p>
+        <p><strong>Formato:</strong> <span id="detalleTamano"></span></p>
+        <p><strong>Precio por m²:</strong> <span id="detallePrecio"></span></p>
+        <p><strong>Descripción:</strong></p>
+        <p id="detalleDescripcion"></p>
+        <div id="detalleTags"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL PASARELA DE PAGO -->
+  <div class="modal-backdrop" id="modalPago">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Pasarela de pago segura (simulada)</h3>
+        <div class="modal-close" data-close="modalPago">&times;</div>
+      </div>
+      <form id="formPago">
+        <div class="pago-resumen">
+          <div class="pago-resumen-row">
+            <span>Subtotal productos:</span>
+            <span id="pagoSubtotal">$0.00</span>
+          </div>
+          <div class="pago-resumen-row">
+            <span>Envío:</span>
+            <span id="pagoEnvio">$0.00</span>
+          </div>
+          <div class="pago-resumen-row">
+            <strong>Total a pagar:</strong>
+            <strong id="pagoTotal">$0.00</strong>
+          </div>
+        </div>
+
+        <div>
+          <label>Datos de envío</label>
+        </div>
+        <div class="pago-grid">
+          <div>
+            <label for="envNombre">Nombre completo</label>
+            <input id="envNombre" required />
+          </div>
+          <div>
+            <label for="envCorreo">Correo electrónico</label>
+            <input id="envCorreo" type="email" required />
+          </div>
+          <div>
+            <label for="envDireccion">Dirección</label>
+            <input id="envDireccion" required />
+          </div>
+          <div>
+            <label for="envCiudad">Ciudad</label>
+            <input id="envCiudad" required />
+          </div>
+          <div>
+            <label for="envCP">Código Postal</label>
+            <input id="envCP" required />
+          </div>
+          <div>
+            <label for="envTelefono">Teléfono</label>
+            <input id="envTelefono" required />
+          </div>
+        </div>
+
+        <div style="margin-top:8px;">
+          <label>Datos de tarjeta</label>
+        </div>
+        <div class="pago-grid">
+          <div>
+            <label for="tarjetaNum">Número de tarjeta</label>
+            <input id="tarjetaNum" maxlength="19" placeholder="XXXX XXXX XXXX XXXX" required />
+          </div>
+          <div>
+            <label for="tarjetaNombre">Nombre en la tarjeta</label>
+            <input id="tarjetaNombre" required />
+          </div>
+          <div>
+            <label for="tarjetaVenc">Vencimiento (MM/AA)</label>
+            <input id="tarjetaVenc" maxlength="5" placeholder="MM/AA" required />
+          </div>
+          <div>
+            <label for="tarjetaCVV">CVV</label>
+            <input id="tarjetaCVV" maxlength="4" required />
+          </div>
+        </div>
+
+        <button class="btn-primary" type="submit" style="margin-top:10px;">Pagar ahora</button>
+        <div class="modal-note">
+          Esta pasarela es una <strong>simulación</strong> para pruebas de la tienda.
+          No se realiza ningún cobro real.
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    var products = [
+      {
+        id: 1,
+        nombre: "Porcelanato Mármol Blanco 60x60",
+        codigo: "P-MB-6060",
+        material: "Porcelanato",
+        uso: "Interior",
+        acabado: "Brillante",
+        tamano: "60 x 60 cm",
+        precio: 380,
+        descripcion: "Porcelanato tipo mármol blanco ideal para salas, recibidores y áreas residenciales de alto impacto.",
+        tags: ["Tráfico medio", "Interior", "Piso/Muro"],
+        imagen: "https://dubaiglass.ae/wp-content/uploads/2022/05/flooring-product-1-600x600.jpg"
+      },
+      {
+        id: 2,
+        nombre: "Azulejo Tipo Madera Roble 20x90",
+        codigo: "C-TM-2090",
+        material: "Cerámico",
+        uso: "Piso/Muro",
+        acabado: "Mate",
+        tamano: "20 x 90 cm",
+        precio: 295,
+        descripcion: "Azulejo cerámico que imita madera de roble, perfecto para áreas cálidas como recámaras y salas.",
+        tags: ["Tipo madera", "Tráfico residencial"],
+        imagen: "https://images.pexels.com/photos/6588588/pexels-photo-6588588.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 3,
+        nombre: "Mármol Travertino Beige 30x60",
+        codigo: "M-TR-3060",
+        material: "Mármol",
+        uso: "Interior",
+        acabado: "Mate",
+        tamano: "30 x 60 cm",
+        precio: 620,
+        descripcion: "Mármol travertino en tono beige para proyectos residenciales y comerciales de alta gama.",
+        tags: ["Alta gama", "Interior", "Muros"],
+        imagen: "https://images.pexels.com/photos/7214460/pexels-photo-7214460.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 4,
+        nombre: "Porcelanato Antiderrapante Exterior 45x45",
+        codigo: "P-EXT-4545",
+        material: "Porcelanato",
+        uso: "Exterior",
+        acabado: "Antiderrapante",
+        tamano: "45 x 45 cm",
+        precio: 410,
+        descripcion: "Porcelanato antiderrapante para terrazas, patios y áreas exteriores con exposición a lluvia.",
+        tags: ["Exterior", "Antiderrapante"],
+        imagen: "https://images.pexels.com/photos/534062/pexels-photo-534062.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 5,
+        nombre: "Azulejo Blanco Brillante 30x45",
+        codigo: "C-BB-3045",
+        material: "Cerámico",
+        uso: "Interior",
+        acabado: "Brillante",
+        tamano: "30 x 45 cm",
+        precio: 180,
+        descripcion: "Azulejo blanco clásico para cocinas y baños, fácil de limpiar y combinar.",
+        tags: ["Cocina", "Baño", "Muro"],
+        imagen: "https://images.pexels.com/photos/4792492/pexels-photo-4792492.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 6,
+        nombre: "Porcelanato Cemento Gris 60x60",
+        codigo: "P-CG-6060",
+        material: "Porcelanato",
+        uso: "Piso/Muro",
+        acabado: "Mate",
+        tamano: "60 x 60 cm",
+        precio: 350,
+        descripcion: "Acabado cemento gris moderno, ideal para estilos industriales y minimalistas.",
+        tags: ["Estilo industrial", "Piso/Muro"],
+        imagen: "https://images.pexels.com/photos/3735411/pexels-photo-3735411.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 7,
+        nombre: "Azulejo Tipo Hidráulico 20x20",
+        codigo: "C-HID-2020",
+        material: "Cerámico",
+        uso: "Piso/Muro",
+        acabado: "Mate",
+        tamano: "20 x 20 cm",
+        precio: 260,
+        descripcion: "Azulejo decorado estilo hidráulico para acentos en cocinas, baños y pisos de áreas sociales.",
+        tags: ["Decorativo", "Vintage"],
+        imagen: "https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 8,
+        nombre: "Mármol Blanco Carrara 60x60",
+        codigo: "M-CAR-6060",
+        material: "Mármol",
+        uso: "Interior",
+        acabado: "Brillante",
+        tamano: "60 x 60 cm",
+        precio: 780,
+        descripcion: "Mármol Carrara para proyectos residenciales de lujo, ideal en pisos de sala y recibidor.",
+        tags: ["Alta gama", "Brillante"],
+        imagen: "https://images.pexels.com/photos/1450046/pexels-photo-1450046.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 9,
+        nombre: "Piso Tipo Madera Nogal 15x90",
+        codigo: "P-MAD-1590",
+        material: "Porcelanato",
+        uso: "Piso/Muro",
+        acabado: "Mate",
+        tamano: "15 x 90 cm",
+        precio: 390,
+        descripcion: "Porcelanato tipo madera color nogal, resistente a humedad para interiores.",
+        tags: ["Tipo madera", "Residencial"],
+        imagen: "https://images.pexels.com/photos/975119/pexels-photo-975119.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 10,
+        nombre: "Piso Exterior Piedra Gris 33x33",
+        codigo: "P-EXT-3333",
+        material: "Cerámico",
+        uso: "Exterior",
+        acabado: "Antiderrapante",
+        tamano: "33 x 33 cm",
+        precio: 220,
+        descripcion: "Piso cerámico tipo piedra para cocheras, patios y pasillos exteriores.",
+        tags: ["Exterior", "Tráfico alto"],
+        imagen: "https://images.pexels.com/photos/1451471/pexels-photo-1451471.jpeg?auto=compress&cs=tinysrgb&w=600"
+      }
+    ];
+
+    var filteredProducts = products.slice();
+    var cart = [];
+    var ultimoSubtotal = 0;
+    var ultimoEnvio = 0;
+    var ultimoTotal = 0;
+
+    function scrollToSection(id) {
+      var el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+
+    function renderProducts(list) {
+      var grid = document.getElementById("productsGrid");
+      grid.innerHTML = "";
+      if (list.length === 0) {
+        grid.innerHTML = "<p>No se encontraron productos con esos filtros.</p>";
+        return;
+      }
+      list.forEach(function (p) {
+        var card = document.createElement("div");
+        card.className = "product-card";
+
+        var img = document.createElement("div");
+        img.className = "product-image";
+        if (p.imagen) img.style.backgroundImage = "url('" + p.imagen + "')";
+
+        var info = document.createElement("div");
+        info.className = "product-info";
+
+        var name = document.createElement("div");
+        name.className = "product-name";
+        name.textContent = p.nombre;
+
+        var meta = document.createElement("div");
+        meta.className = "product-meta";
+        meta.textContent = p.material + " · " + p.uso + " · " + p.acabado + " · " + p.tamano;
+
+        var price = document.createElement("div");
+        price.className = "product-price";
+        price.textContent = "$" + p.precio.toFixed(2) + " / m²";
+
+        info.appendChild(name);
+        info.appendChild(meta);
+        info.appendChild(price);
+
+        var actions = document.createElement("div");
+        actions.className = "product-actions";
+
+        var btnAdd = document.createElement("button");
+        btnAdd.className = "btn-small btn-add";
+        btnAdd.textContent = "Agregar al carrito";
+        btnAdd.onclick = function () { addToCart(p.id); };
+
+        var btnDetails = document.createElement("button");
+        btnDetails.className = "btn-small btn-details";
+        btnDetails.textContent = "Ver detalles";
+        btnDetails.onclick = function () { openProductDetails(p.id); };
+
+        actions.appendChild(btnAdd);
+        actions.appendChild(btnDetails);
+
+        card.appendChild(img);
+        card.appendChild(info);
+        card.appendChild(actions);
+
+        grid.appendChild(card);
+      });
+    }
+
+    function applyFilters() {
+      var mat = document.getElementById("filterMaterial").value;
+      var uso = document.getElementById("filterUso").value;
+      var ac = document.getElementById("filterAcabado").value;
+      var search = document.getElementById("searchInput").value.toLowerCase().trim();
+
+      filteredProducts = products.filter(function (p) {
+        if (mat && p.material !== mat) return false;
+        if (uso && p.uso !== uso) return false;
+        if (ac && p.acabado !== ac) return false;
+        if (search) {
+          var text = (p.nombre + " " + p.material + " " + p.descripcion).toLowerCase();
+          if (text.indexOf(search) === -1) return false;
+        }
+        return true;
+      });
+
+      renderProducts(filteredProducts);
+    }
+
+    document.getElementById("filterMaterial").addEventListener("change", applyFilters);
+    document.getElementById("filterUso").addEventListener("change", applyFilters);
+    document.getElementById("filterAcabado").addEventListener("change", applyFilters);
+    document.getElementById("searchInput").addEventListener("input", applyFilters);
+
+    document.getElementById("btnClearFilters").addEventListener("click", function () {
+      document.getElementById("filterMaterial").value = "";
+      document.getElementById("filterUso").value = "";
+      document.getElementById("filterAcabado").value = "";
+      document.getElementById("searchInput").value = "";
+      filteredProducts = products.slice();
+      renderProducts(filteredProducts);
+    });
+
+    function addToCart(productId) {
+      var existing = cart.find(function (item) { return item.id === productId; });
+      if (existing) existing.cantidad += 1;
+      else {
+        var product = products.find(function (p) { return p.id === productId; });
+        if (!product) return;
+        cart.push({ id: product.id, cantidad: 1 });
+      }
+      updateCartUI();
+      openCart();
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(function (item) { return item.id !== productId; });
+      updateCartUI();
+    }
+
+    function changeQty(productId, delta) {
+      var item = cart.find(function (i) { return i.id === productId; });
+      if (!item) return;
+      item.cantidad += delta;
+      if (item.cantidad <= 0) removeFromCart(productId);
+      else updateCartUI();
+    }
+
+    function updateCartUI() {
+      var count = cart.reduce(function (sum, item) { return sum + item.cantidad; }, 0);
+      document.getElementById("cartCount").textContent = count;
+
+      var cartBody = document.getElementById("cartBody");
+      cartBody.innerHTML = "";
+
+      if (cart.length === 0) {
+        cartBody.innerHTML = '<div class="cart-empty">Tu carrito está vacío.</div>';
+        return;
+      }
+
+      var subtotal = 0;
+
+      cart.forEach(function (item) {
+        var product = products.find(function (p) { return p.id === item.id; });
+        if (!product) return;
+        var total = product.precio * item.cantidad;
+        subtotal += total;
+
+        var row = document.createElement("div");
+        row.className = "cart-item";
+
+        var info = document.createElement("div");
+        var title = document.createElement("div");
+        title.className = "cart-item-title";
+        title.textContent = product.nombre;
+
+        var meta = document.createElement("div");
+        meta.className = "cart-item-meta";
+        meta.textContent = "Precio: $" + product.precio.toFixed(2) + " / m² · Cantidad: " + item.cantidad;
+
+        info.appendChild(title);
+        info.appendChild(meta);
+
+        var actions = document.createElement("div");
+        actions.className = "cart-item-actions";
+
+        var totalText = document.createElement("div");
+        totalText.textContent = "$" + total.toFixed(2);
+
+        var qty = document.createElement("div");
+        qty.className = "cart-qty";
+        var btnMinus = document.createElement("button");
+        btnMinus.textContent = "-";
+        btnMinus.onclick = function () { changeQty(product.id, -1); };
+        var qtySpan = document.createElement("span");
+        qtySpan.textContent = item.cantidad;
+        var btnPlus = document.createElement("button");
+        btnPlus.textContent = "+";
+        btnPlus.onclick = function () { changeQty(product.id, 1); };
+        qty.appendChild(btnMinus);
+        qty.appendChild(qtySpan);
+        qty.appendChild(btnPlus);
+
+        var btnRemove = document.createElement("button");
+        btnRemove.className = "cart-remove";
+        btnRemove.textContent = "Eliminar";
+        btnRemove.onclick = function () { removeFromCart(product.id); };
+
+        actions.appendChild(totalText);
+        actions.appendChild(qty);
+        actions.appendChild(btnRemove);
+
+        row.appendChild(info);
+        row.appendChild(actions);
+
+        cartBody.appendChild(row);
+      });
+
+      var summary = document.createElement("div");
+      summary.className = "cart-summary";
+      var row1 = document.createElement("div");
+      row1.className = "cart-summary-row";
+      row1.innerHTML = "<span>Subtotal:</span><span>$" + subtotal.toFixed(2) + "</span>";
+      var row2 = document.createElement("div");
+      row2.className = "cart-summary-row";
+      var envio = subtotal > 0 ? 250 : 0;
+      row2.innerHTML = "<span>Envío estimado:</span><span>$" + envio.toFixed(2) + "</span>";
+      var row3 = document.createElement("div");
+      row3.className = "cart-summary-row";
+      var totalFinal = subtotal + envio;
+      row3.innerHTML = "<strong>Total estimado:</strong><strong>$" + totalFinal.toFixed(2) + "</strong>";
+
+      summary.appendChild(row1);
+      summary.appendChild(row2);
+      summary.appendChild(row3);
+      cartBody.appendChild(summary);
+
+      ultimoSubtotal = subtotal;
+      ultimoEnvio = envio;
+      ultimoTotal = totalFinal;
+    }
+
+    function openCart() {
+      document.getElementById("cartSidebar").classList.add("open");
+    }
+    function closeCart() {
+      document.getElementById("cartSidebar").classList.remove("open");
+    }
+
+    document.getElementById("btnCart").addEventListener("click", function (e) {
+      e.preventDefault();
+      openCart();
+    });
+    document.getElementById("cartClose").addEventListener("click", closeCart);
+
+    document.getElementById("btnCheckout").addEventListener("click", function () {
+      if (cart.length === 0) {
+        alert("Tu carrito está vacío.");
+        return;
+      }
+      document.getElementById("pagoSubtotal").textContent = "$" + ultimoSubtotal.toFixed(2);
+      document.getElementById("pagoEnvio").textContent = "$" + ultimoEnvio.toFixed(2);
+      document.getElementById("pagoTotal").textContent = "$" + ultimoTotal.toFixed(2);
+      document.getElementById("modalPago").classList.add("open");
+    });
+
+    document.getElementById("formPago").addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!cart.length) {
+        alert("No hay productos en el carrito.");
+        return;
+      }
+      var tarjetaNum = document.getElementById("tarjetaNum").value.replace(/\s+/g, "");
+      var venc = document.getElementById("tarjetaVenc").value.trim();
+      var cvv = document.getElementById("tarjetaCVV").value.trim();
+
+      if (tarjetaNum.length < 13 || tarjetaNum.length > 19) {
+        alert("Revisa el número de tarjeta.");
+        return;
+      }
+      if (!/^\d{2}\/\d{2}$/.test(venc)) {
+        alert("Formato de vencimiento incorrecto. Usa MM/AA.");
+        return;
+      }
+      if (!/^\d{3,4}$/.test(cvv)) {
+        alert("Revisa el CVV.");
+        return;
+      }
+
+      alert(
+        "Pago procesado correctamente (simulación).\n\n" +
+        "Total pagado: $" + ultimoTotal.toFixed(2) +
+        "\nGracias por tu compra en LAN Servicios y Comercio."
+      );
+
+      cart = [];
+      updateCartUI();
+      document.getElementById("modalPago").classList.remove("open");
+      closeCart();
+    });
+
+    document.getElementById("btnLogin").addEventListener("click", function (e) {
+      e.preventDefault();
+      document.getElementById("modalLogin").classList.add("open");
+    });
+
+    document.querySelectorAll(".modal-close").forEach(function (el) {
+      el.addEventListener("click", function () {
+        var target = el.getAttribute("data-close");
+        if (target) document.getElementById(target).classList.remove("open");
+        else el.closest(".modal-backdrop").classList.remove("open");
+      });
+    });
+
+    function openProductDetails(id) {
+      var p = products.find(function (prod) { return prod.id === id; });
+      if (!p) return;
+      document.getElementById("detalleNombre").textContent = p.nombre;
+      document.getElementById("detalleCodigo").textContent = p.codigo;
+      document.getElementById("detalleMaterial").textContent = p.material;
+      document.getElementById("detalleUso").textContent = p.uso;
+      document.getElementById("detalleAcabado").textContent = p.acabado;
+      document.getElementById("detalleTamano").textContent = p.tamano;
+      document.getElementById("detallePrecio").textContent = "$" + p.precio.toFixed(2) + " / m²";
+      document.getElementById("detalleDescripcion").textContent = p.descripcion;
+
+      var tagsDiv = document.getElementById("detalleTags");
+      tagsDiv.innerHTML = "";
+      if (p.tags && p.tags.length > 0) {
+        p.tags.forEach(function (t) {
+          var span = document.createElement("span");
+          span.className = "tag";
+          span.textContent = t;
+          tagsDiv.appendChild(span);
+        });
+      }
+      document.getElementById("modalProducto").classList.add("open");
+    }
+
+    document.querySelectorAll(".modal-backdrop").forEach(function (backdrop) {
+      backdrop.addEventListener("click", function (e) {
+        if (e.target === backdrop) backdrop.classList.remove("open");
+      });
+    });
+
+    renderProducts(filteredProducts);
+    updateCartUI();
+  </script>
+</body>
+</html>
+
+
